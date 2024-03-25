@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// great info on prisma setup by WDS: https://www.youtube.com/watch?v=RebA5J-rlwg
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// defines schema data output
+model Todo {
+  // id is required
+  id        String   @id @default(uuid())
+  title     String
+  complete  Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// NOTES for model above 👆
+// models represent different tables within database, to store data
+// models are composed of fields
+// each line in a model is a field (EG - id string ...)
+// fields are composed of four different parts
+// 1. name, 2. type, 3. field modifier, 4. attributes (start with @)
+// name and type are required, modifier and attributes are optional
+// types (not all providers use all types): String, Boolean, DateTime, Int, BigInt, Float, Decimal, Json, Bytes, Unsupported
+// field type modifiers, [] the array modifier which is for many, and ? which says the type is optional
